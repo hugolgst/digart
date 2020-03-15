@@ -9,6 +9,8 @@ import (
 // SerializeDigits retrieves the digits contained in a file and shrinks it to the number of
 // digits wanted.
 func SerializeDigits(filePath string, digits int) string {
+	fmt.Printf("Reading %s...\n", filePath)
+
 	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		err := fmt.Sprintf("Cannot read file %s.", filePath)

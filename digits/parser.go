@@ -1,10 +1,15 @@
 package digits
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 // ParseDigits returns a 3D array of integers which represents the segments of the first circle
 // then the different lines of a segment and finally the points which represents the decimals.
 func ParseDigits(number string) [][][]int {
+	fmt.Printf("Parsing the digits\n")
+
 	// Generate the 3D array
 	var digits = make([][][]int, 10)
 
