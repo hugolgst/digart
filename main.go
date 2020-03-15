@@ -1,9 +1,9 @@
 package main
 
 import (
-	"./digits"
-	digartImage "./image"
 	"fmt"
+	"github.com/hugolgst/digart/digits"
+	digartImage "github.com/hugolgst/digart/image"
 	"image"
 	"image/color"
 	"image/draw"
