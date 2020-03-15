@@ -8,6 +8,7 @@
 
 <p align="center">
   <a href="https://goreportcard.com/report/github.com/hugolgst/digart"><img src="https://goreportcard.com/badge/github.com/hugolgst/digart"></a>
+  <a href="https://travis-ci.org/hugolgst/digart"><img src="https://travis-ci.org/hugolgst/digart.svg?branch=master"></a>
 </p>
 
 <p align="center">
@@ -16,24 +17,24 @@
 </p>
 
 ## Getting started
-Clone the project and get into it:
+Download the [latest release](https://github.com/hugolgst/digart/releases):
+
+And then run the tool
 
 ```bash
-$ git clone git@github.com:hugolgst/digart.git
-$ cd digart
+$ ./digart
+$ digart.exe
 ```
 
-To run the tool, just type 
-
-```bash
-$ go run main.go
-```
-
-To update the image just edit the code in `main.go`, you can use the numbers already in the project:
+To change number you can just write the file path
 ```
 resources/e.txt
 resources/phi.txt
 resources/pi.txt
+```
+
+```bash
+$ ./digart resources/e.txt
 ```
 
 ## License
