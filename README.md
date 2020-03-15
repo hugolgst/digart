@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://i.imgur.com/rlaSEuV.png" alt="Digart pi" width="300">
+  <img src="https://i.imgur.com/rlaSEuV.png" alt="Digart pi" width="350">
   <br>
 </h1>
 
