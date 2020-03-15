@@ -44,7 +44,7 @@ func DrawPoint(img image.RGBA, x, y, width int, color color.RGBA) {
 
 // DrawCircle draws in the given image the middle circle of the visualization with
 // the 10 segments in color.
-func DrawCircle(img image.RGBA, radius, width, imageWidth, imageHeight int) {
+func DrawCircle(img image.RGBA, radius, width, image int) {
 	fmt.Println("Drawing main circle")
 
 	// Draw multiples layers for the width
@@ -63,8 +63,8 @@ func DrawCircle(img image.RGBA, radius, width, imageWidth, imageHeight int) {
 			}
 
 			// Calculate the coordinates for `t` in the center of the image
-			x := float64(radius + w) * math.Cos(t) + float64(imageWidth/2)
-			y := float64(radius + w) * math.Sin(t) + float64(imageHeight/2)
+			x := float64(radius + w) * math.Cos(t) + float64(image/2)
+			y := float64(radius + w) * math.Sin(t) + float64(image/2)
 			// Draw the point
 			img.Set(int(x), int(y), color)
 

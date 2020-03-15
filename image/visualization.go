@@ -8,7 +8,7 @@ import (
 )
 
 // DrawData draws in the given image all the points for the parsed decimals
-func DrawData(img image.RGBA, parsedDigits [][][]int, imageWidth, imageHeight int) {
+func DrawData(img image.RGBA, parsedDigits [][][]int, radius, image int) {
 	fmt.Println("Drawing the data")
 
 	// Iterate through segments
@@ -16,7 +16,7 @@ func DrawData(img image.RGBA, parsedDigits [][][]int, imageWidth, imageHeight in
 		// Browse all the lines
 		for line := 0; line < len(segment); line++ {
 			// Calculate the radius for the actual line
-			r := float64(420 + line * 25)
+			r := float64(radius*5/4 + line * radius/15)
 
 			// Arbitrary number of iterations
 			iterations := 55
@@ -25,8 +25,8 @@ func DrawData(img image.RGBA, parsedDigits [][][]int, imageWidth, imageHeight in
 			// Draw the points
 			for i := 0; i < int(iterations*2); i++ {
 				// Calculate the coordinates
-				x1 := r*math.Cos(t)+float64(imageWidth/2)
-				y1 := r*math.Sin(t)+float64(imageHeight/2)
+				x1 := r*math.Cos(t)+float64(image/2)
+				y1 := r*math.Sin(t)+float64(image/2)
 
 				t += math.Pi/float64(iterations)
 				size := iterations/5
