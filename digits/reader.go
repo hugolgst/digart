@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// SerializeDigits reads the digits contained in a file and shrinks it to the number of
+// SerializeDigits retrieves the digits contained in a file and shrinks it to the number of
 // digits wanted.
 func SerializeDigits(filePath string, digits int) string {
 	data, err := ioutil.ReadFile(filePath)
