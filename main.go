@@ -9,6 +9,7 @@ import (
 	"image/draw"
 	"image/png"
 	"os"
+	"strconv"
 )
 
 // CreateImage returns the created image of `width` and `height` dimensions.
@@ -21,15 +22,33 @@ func CreateImage(width int, height int, background color.RGBA) *image.RGBA {
 }
 
 func main() {
-	filePath := os.Args[1]
-	if filePath == "" {
+	// File to use
+	var filePath string
+	if len(os.Args) < 2 {
 		fmt.Println("The file path was not found, using resources/pi by default.")
 		filePath = "resources/pi.txt"
+	} else {
+		filePath = os.Args[1]
+	}
+
+	// Number of digits
+	var d string
+	if len(os.Args) < 3 {
+		fmt.Println("The number of digits was not found, using 2000 by default.")
+		d = "2000"
+	} else {
+		d = os.Args[2]
+	}
+
+	// Parse the number of digits into an integer
+	parsedD, err := strconv.Atoi(d)
+	if err != nil || parsedD < 1500 {
+		fmt.Println("The number of digits is not a valid number, using 2000. (must not be lower than 1500)")
+		parsedD = 2000
 	}
 
 	// Read and parse π
-	d := 2000
-	pi := digits.SerializeDigits(filePath, d)
+	pi := digits.SerializeDigits(filePath, parsedD)
 	parsedDigits := digits.ParseDigits(pi)
 
 	// Create the image
@@ -38,7 +57,7 @@ func main() {
 		panic(err)
 	}
 
-	dim := d*2
+	dim := parsedD * 2
 	background := color.RGBA{A: 255}
 	img := CreateImage(dim, dim, background)
 
