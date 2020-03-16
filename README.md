@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://i.imgur.com/rlaSEuV.png" alt="Digart pi" width="350">
+  <img src="https://i.imgur.com/7MQg7EH.jpg" alt="Digart pi" width="850">
   <br>
 </h1>
 
@@ -27,7 +27,6 @@ And then run the tool
 
 ```bash
 $ ./digart
-$ digart.exe
 ```
 
 To change number you can just write the file path
@@ -37,8 +36,10 @@ resources/phi.txt
 resources/pi.txt
 ```
 
+And the number of digits (not lower than 1500)
+
 ```bash
-$ ./digart resources/e.txt
+$ ./digart resources/e.txt 3000
 ```
 
 ## License
