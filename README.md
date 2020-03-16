@@ -12,9 +12,13 @@
 </p>
 
 <p align="center">
+  <a href="#introduction">Introduction</a> —
   <a href="#getting-started">Getting started</a> —
   <a href="#license">License</a>
 </p>
+
+## Introduction
+In the image below, each dot represents a decimal which is in a segment that represents the previous decimal, its position is its position in π.
 
 ## Getting started
 Download the [latest release](https://github.com/hugolgst/digart/releases):
