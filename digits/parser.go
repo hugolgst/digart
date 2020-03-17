@@ -3,6 +3,7 @@ package digits
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 const bubblesBySegment = 15
@@ -11,6 +12,8 @@ const bubblesBySegment = 15
 // then the different lines of a segment and finally the points which represents the decimals.
 func ParseDigits(number string) [][][]int {
 	fmt.Printf("Parsing the digits\n")
+
+	number = strings.Replace(number, ".", "", -1)
 
 	// Generate the 3D array
 	var digits = make([][][]int, 10)
