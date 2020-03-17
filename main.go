@@ -1,11 +1,11 @@
 package main
 
 import (
+	"./digits"
+	digartImage "./image"
 	"bytes"
 	"encoding/base64"
 	"fmt"
-	"github.com/hugolgst/digart/digits"
-	digartImage "github.com/hugolgst/digart/image"
 	"image"
 	"image/color"
 	"image/draw"
