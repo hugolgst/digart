@@ -28,8 +28,6 @@ func BuildImage(number string) string {
 
 	out := bytes.NewBuffer(nil)
 
-	fmt.Println(len(number))
-
 	dim := len(number) * 5/3
 	background := color.RGBA{A: 255}
 	img := CreateImage(dim, dim, background)
@@ -58,8 +56,29 @@ func main() {
 
 		number = numberInput.String()
 
+		if len(number) < 1500 {
+			js.Global().Get("document").
+				Call("getElementById", "notification-message").
+				Set("innerHTML", "The number must contain at least 1500 digits, please.")
+
+			js.Global().Get("document").
+				Call("getElementById", "notification-modal").
+				Set("className", "modal is-active")
+			return nil
+		}
+
 		imageSrc := BuildImage(number)
-		js.Global().Get("document").Call("getElementById", "image").Set("src", imageSrc)
+		parameters := map[string]string{
+			"src": imageSrc,
+			"width": "500",
+			"height": "500",
+		}
+
+		for id, value := range parameters {
+			js.Global().Get("document").
+				Call("getElementById", "image").
+				Set(id, value)
+		}
 
 		return nil
 	})

@@ -1,6 +1,15 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <title>Digart</title>
+        <style>
+            body {
+                background-color: #000000;
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         <script src="wasm_exec.js"></script>
         <script>
             const go = new Go();
@@ -10,9 +19,161 @@
         </script>
     </head>
     <body>
-        <input id="number" value="3.14159" />
-        <button id="submit">run</button>
+        <div class="modal" id="notification-modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <div class="notification is-danger is-light">
+                    <button id="notification-delete" class="delete"></button>
+                    <span id="notification-message">
 
-        <img id="image" src="" width="500" height="500">
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <section class="hero">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <h1 class="title" style="color: #ffffff;">
+                        circle visualization of a number's digits
+                    </h1>
+                    <h1 class="subtitle" style="color: #d2d2d2;">
+                        using Go and WebAssembly
+                    </h1>
+                </div>
+            </div>
+        </section>
+
+        <div class="container is-centered">
+            <!-- Form -->
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="field">
+                        <p class="control is-expanded">
+                            <textarea
+                                    id="number"
+                                    class="textarea"
+                                    type="text"
+                                    placeholder="Number, at least 1500 digits"
+                            ></textarea>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container has-text-centered">
+                <p>or</p>
+            </div>
+            <br>
+
+            <div class="columns is-centered">
+                <div class="column is-6">
+                    <div class="field is-grouped">
+                        <p class="control is-expanded">
+                            <input
+                                    id="digits"
+                                    class="input"
+                                    type="text"
+                                    placeholder="Number of digits wanted"
+                            >
+                        </p>
+
+                        <div class="file is-fullwidth">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="resume">
+                                <span class="file-cta">
+                              <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                              </span>
+                              <span class="file-label">
+                                Choose a file…
+                              </span>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columns is-centered">
+                <div class="column has-text-centered is-2">
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a id="read" class="button is-rounded">
+                                Read
+                            </a>
+                        </p>
+
+                        <p class="control">
+                            <a id="submit" class="button is-rounded is-info">
+                                Generate
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="container has-text-centered">
+            <p>The image might take a little time to build up.</p>
+            <img id="image">
+        </div>
+
+        <footer class="section">
+            <!-- Contact and licence -->
+            <div class="content has-text-centered">
+                <p style="color: #ffffff;">
+                    Using <a href="https://webassembly.org/">WebAssembly</a> and <a href="https://golang.org/">Go</a>.
+                </p>
+            </div>
+
+            <!-- Technologies logos -->
+            <div class="columns is-centered">
+                <figure class="column image is-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/WebAssembly_Logo.svg/1200px-WebAssembly_Logo.svg.png">
+                </figure>
+
+                <figure class="column image is-1">
+                    <img src="http://blog.engineering.publicissapient.fr/wp-content/uploads/2016/10/gopher.png">
+                </figure>
+            </div>
+
+            <!-- Contact and licence -->
+            <div class="content has-text-centered">
+                <p style="color: #ffffff;">
+                    <a href="https://github.com/hugolgst/digart">Digart</a> by <a href="mailto:hugo@olivia-ai.org">Hugo Lageneste</a>. The source code is licensed
+                    <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+                </p>
+            </div>
+        </footer>
+
+        <script>
+            // Delete the notification
+            document.getElementById("notification-delete").onclick = function() {
+                document.getElementById("notification-modal").className = "modal"
+            }
+
+            // Read the content of a file and put it into the number field
+            document.getElementById("read").onclick = function() {
+                const input = document.querySelector("input[type=file]")
+                if (input.files.length === 0) {
+                    console.log('No file selected.')
+                    return
+                }
+
+                const reader = new FileReader();
+                reader.onload = function fileReadCompleted() {
+                    let content = reader.result.substring(
+                        0,
+                        parseInt(document.getElementById("digits").value)
+                    )
+
+                    document.getElementById("number").value = content
+                };
+                reader.readAsText(input.files[0]);
+            }
+        </script>
     </body>
 </html>
