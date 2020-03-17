@@ -1,15 +1,16 @@
 package main
 
 import (
+	"./digits"
+	digartImage "./image"
+	"bytes"
+	"encoding/base64"
 	"fmt"
-	"github.com/hugolgst/digart/digits"
-	digartImage "github.com/hugolgst/digart/image"
 	"image"
 	"image/color"
 	"image/draw"
 	"image/png"
-	"os"
-	"strconv"
+	"syscall/js"
 )
 
 // CreateImage returns the created image of `width` and `height` dimensions.
@@ -21,43 +22,13 @@ func CreateImage(width int, height int, background color.RGBA) *image.RGBA {
 	return img
 }
 
-func main() {
-	// File to use
-	var filePath string
-	if len(os.Args) < 2 {
-		fmt.Println("The file path was not found, using resources/pi by default.")
-		filePath = "resources/pi.txt"
-	} else {
-		filePath = os.Args[1]
-	}
+func BuildImage(number string) string {
+	// Read and parse the number
+	parsedDigits := digits.ParseDigits(number)
 
-	// Number of digits
-	var d string
-	if len(os.Args) < 3 {
-		fmt.Println("The number of digits was not found, using 2000 by default.")
-		d = "2000"
-	} else {
-		d = os.Args[2]
-	}
+	out := bytes.NewBuffer(nil)
 
-	// Parse the number of digits into an integer
-	parsedD, err := strconv.Atoi(d)
-	if err != nil || parsedD < 1500 {
-		fmt.Println("The number of digits is not a valid number, using 2000. (must not be lower than 1500)")
-		parsedD = 2000
-	}
-
-	// Read and parse π
-	pi := digits.SerializeDigits(filePath, parsedD)
-	parsedDigits := digits.ParseDigits(pi)
-
-	// Create the image
-	out, err := os.Create("digart.png")
-	if err != nil {
-		panic(err)
-	}
-
-	dim := parsedD * 2
+	dim := len(number) * 5/3
 	background := color.RGBA{A: 255}
 	img := CreateImage(dim, dim, background)
 
@@ -65,10 +36,56 @@ func main() {
 	digartImage.DrawCircle(*img, 350, 40, dim)
 	digartImage.DrawData(*img, parsedDigits, 350, dim)
 
-	err = png.Encode(out, img)
-	if err != nil {
+	if err := png.Encode(out, img); err != nil {
 		panic(err)
 	}
 
-	fmt.Println("Image saved.")
+	b64 := base64.StdEncoding.EncodeToString(out.Bytes())
+	return fmt.Sprint(`data:image/png;base64,`, b64)
+}
+
+func main() {
+	var number string
+
+	c := make(chan struct{}, 0)
+
+	runAction := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		numberInput := js.Global().Get("document").
+			Call("getElementById", "number").
+			Get("value")
+
+		number = numberInput.String()
+
+		if len(number) < 1500 {
+			js.Global().Get("document").
+				Call("getElementById", "notification-message").
+				Set("innerHTML", "The number must contain at least 1500 digits, please.")
+
+			js.Global().Get("document").
+				Call("getElementById", "notification-modal").
+				Set("className", "modal is-active")
+			return nil
+		}
+
+		imageSrc := BuildImage(number)
+		parameters := map[string]string{
+			"src": imageSrc,
+			"width": "500",
+			"height": "500",
+		}
+
+		for id, value := range parameters {
+			js.Global().Get("document").
+				Call("getElementById", "image").
+				Set(id, value)
+		}
+
+		return nil
+	})
+
+	js.Global().Get("document").
+		Call("getElementById", "submit").
+		Call("addEventListener", "click", runAction)
+
+	<-c
 }

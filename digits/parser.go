@@ -5,6 +5,8 @@ import (
 	"strconv"
 )
 
+const bubblesBySegment = 15
+
 // ParseDigits returns a 3D array of integers which represents the segments of the first circle
 // then the different lines of a segment and finally the points which represents the decimals.
 func ParseDigits(number string) [][][]int {
@@ -21,11 +23,11 @@ func ParseDigits(number string) [][][]int {
 
 		// Create a new segment if no one has been found
 		if len(segments) == 0 {
-			segments = append(segments, MakeIntArray(10))
+			segments = append(segments, MakeIntArray(bubblesBySegment))
 		}
 
 		// Set the position of the digit in the given number for an array of 10 numbers
-		position := digitIndex % 10
+		position := digitIndex % bubblesBySegment
 
 		// Then generate the segment with the current value and its position
 		digits[previous] = GenerateSegment(segments, position, current)
@@ -49,7 +51,7 @@ func GenerateSegment(segments [][]int, position, value int) [][]int {
 	// If a position has not been found in the existent segments' lines then create one
 	// and fill it with the current digit
 	if !filled {
-		segments = append(segments, MakeIntArray(10))
+		segments = append(segments, MakeIntArray(bubblesBySegment))
 		segments[len(segments)-1][position] = value
 	}
 

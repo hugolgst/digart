@@ -11,6 +11,9 @@ import (
 func DrawData(img image.RGBA, parsedDigits [][][]int, radius, image int) {
 	fmt.Println("Drawing the data")
 
+	// Arbitrary number of iterations
+	iterations := 80
+
 	// Iterate through segments
 	for segmentIndex, segment := range parsedDigits {
 		// Browse all the lines
@@ -18,8 +21,6 @@ func DrawData(img image.RGBA, parsedDigits [][][]int, radius, image int) {
 			// Calculate the radius for the actual line
 			r := float64(radius*5/4 + line * radius/15)
 
-			// Arbitrary number of iterations
-			iterations := 55
 			t := math.Pi/float64(iterations)
 
 			// Draw the points
@@ -46,7 +47,7 @@ func DrawData(img image.RGBA, parsedDigits [][][]int, radius, image int) {
 				}
 
 				// Then draw the point
-				DrawPoint(img, int(x1), int(y1), 9, c)
+				DrawPoint(img, int(x1), int(y1), 6, c)
 			}
 		}
 	}
