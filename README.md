@@ -9,38 +9,18 @@
 <p align="center">
   <a href="https://goreportcard.com/report/github.com/hugolgst/digart"><img src="https://goreportcard.com/badge/github.com/hugolgst/digart"></a>
   <a href="https://travis-ci.org/hugolgst/digart"><img src="https://travis-ci.org/hugolgst/digart.svg?branch=master"></a>
+  <a href="https://app.netlify.com/sites/digart/deploys"><img src="https://api.netlify.com/api/v1/badges/7742e0dd-4f03-4c5e-a5bf-3342219f8e0f/deploy-status"></a>
 </p>
 
 <p align="center">
   <a href="#introduction">Introduction</a> —
-  <a href="#getting-started">Getting started</a> —
   <a href="#license">License</a>
 </p>
 
 ## Introduction
 In the image below, each dot represents a decimal which is in a segment that represents the previous decimal, its position is its position in π.
 
-## Getting started
-Download the [latest release](https://github.com/hugolgst/digart/releases):
-
-And then run the tool
-
-```bash
-$ ./digart
-```
-
-To change number you can just write the file path
-```
-resources/e.txt
-resources/phi.txt
-resources/pi.txt
-```
-
-And the number of digits (not lower than 1500)
-
-```bash
-$ ./digart resources/e.txt 3000
-```
+The website is using JS and WebAssembly
 
 ## License
 [MIT](https://github.com/hugolgst/digart/blob/master/LICENSE)
