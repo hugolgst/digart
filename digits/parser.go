@@ -48,6 +48,7 @@ func GenerateSegment(segments [][]int, position, value int) [][]int {
 		if segments[i][position] == -1 {
 			segments[i][position] = value
 			filled = true
+			break
 		}
 	}
 

@@ -28,7 +28,7 @@ func BuildImage(number string) string {
 
 	out := bytes.NewBuffer(nil)
 
-	dim := len(number) * 5/3
+	dim := len(number)/2
 	background := color.RGBA{A: 255}
 	img := CreateImage(dim, dim, background)
 
