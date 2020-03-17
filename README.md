@@ -8,7 +8,6 @@
 
 <p align="center">
   <a href="https://goreportcard.com/report/github.com/hugolgst/digart"><img src="https://goreportcard.com/badge/github.com/hugolgst/digart"></a>
-  <a href="https://travis-ci.org/hugolgst/digart"><img src="https://travis-ci.org/hugolgst/digart.svg?branch=master"></a>
   <a href="https://app.netlify.com/sites/digart/deploys"><img src="https://api.netlify.com/api/v1/badges/7742e0dd-4f03-4c5e-a5bf-3342219f8e0f/deploy-status"></a>
 </p>
 
