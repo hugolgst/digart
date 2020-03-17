@@ -30,7 +30,7 @@ func BuildImage(number string) string {
 
 	fmt.Println(len(number))
 
-	dim := len(number) * 2
+	dim := len(number) * 5/3
 	background := color.RGBA{A: 255}
 	img := CreateImage(dim, dim, background)
 

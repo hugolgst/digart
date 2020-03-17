@@ -19,7 +19,7 @@ func DrawData(img image.RGBA, parsedDigits [][][]int, radius, image int) {
 			r := float64(radius*5/4 + line * radius/15)
 
 			// Arbitrary number of iterations
-			iterations := 55
+			iterations := 80
 			t := math.Pi/float64(iterations)
 
 			// Draw the points
@@ -46,7 +46,7 @@ func DrawData(img image.RGBA, parsedDigits [][][]int, radius, image int) {
 				}
 
 				// Then draw the point
-				DrawPoint(img, int(x1), int(y1), 9, c)
+				DrawPoint(img, int(x1), int(y1), 6, c)
 			}
 		}
 	}

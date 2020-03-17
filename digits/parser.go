@@ -21,11 +21,11 @@ func ParseDigits(number string) [][][]int {
 
 		// Create a new segment if no one has been found
 		if len(segments) == 0 {
-			segments = append(segments, MakeIntArray(10))
+			segments = append(segments, MakeIntArray(15))
 		}
 
 		// Set the position of the digit in the given number for an array of 10 numbers
-		position := digitIndex % 10
+		position := digitIndex % 15
 
 		// Then generate the segment with the current value and its position
 		digits[previous] = GenerateSegment(segments, position, current)
@@ -49,7 +49,7 @@ func GenerateSegment(segments [][]int, position, value int) [][]int {
 	// If a position has not been found in the existent segments' lines then create one
 	// and fill it with the current digit
 	if !filled {
-		segments = append(segments, MakeIntArray(10))
+		segments = append(segments, MakeIntArray(15))
 		segments[len(segments)-1][position] = value
 	}
 
