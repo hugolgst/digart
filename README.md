@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://i.imgur.com/auKLaT2.png" alt="Digart pi" width="850">
+  <img src="https://user-images.githubusercontent.com/15371828/111070096-5f305880-84d0-11eb-903b-6ee12ac4dc56.png" alt="Digart pi" width="1500">
   <br>
 </h1>
 
